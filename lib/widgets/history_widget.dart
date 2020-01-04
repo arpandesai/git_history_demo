@@ -46,7 +46,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
         _openURLinBrowser(commit.externalURL);
       },
       title: Text(commit.summary),
-      subtitle: Text(commit.shaHash),
+      subtitle: Text(commit.shaHash + ", " + commit.timeStamp),
       leading: Column(
         children: <Widget>[
           Text(commit.user.login),
