@@ -22,6 +22,14 @@ class _HistoryWidgetState extends State<HistoryWidget> {
   }
 
   @override
+  void didUpdateWidget(HistoryWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    this.commits = null;
+    this.refreshCommits(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return commits == null
         ? Center(child: Text("Retrieving Commits..."))

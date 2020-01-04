@@ -51,7 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-          actions: <Widget>[FlatButton(onPressed: null, child: Icon(Icons.refresh))],
+          actions: <Widget>[FlatButton(onPressed: (){
+            setState(() {
+
+            });
+          }, child: Icon(Icons.refresh))],
       ),
       body: HistoryWidget());
 
