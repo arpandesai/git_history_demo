@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:git_history_demo/models/GitCommit.dart';
 import 'package:git_history_demo/networking/github_request_wrapper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HistoryWidget extends StatefulWidget {
   HistoryWidget({Key key}) : super(key: key);
@@ -40,12 +41,25 @@ class _HistoryWidgetState extends State<HistoryWidget> {
 
   Widget commitWidget(GitCommit commit) {
     return ListTile(
-        title: Text(commit.summary), subtitle: Text(commit.shaHash), leading: Column(
-          children: <Widget>[
-            Text(commit.user.login),
-            Image(width: 30, height: 30, fit: BoxFit.fitHeight, image: CachedNetworkImageProvider(commit.user.avatar_url)),
-          ],
-        ), trailing: Icon(Icons.open_in_new),);
+      enabled: true,
+      onTap: (){
+        _openURLinBrowser(commit.externalURL);
+      },
+      title: Text(commit.summary),
+      subtitle: Text(commit.shaHash),
+      leading: Column(
+        children: <Widget>[
+          Text(commit.user.login),
+          Image(
+              width: 30,
+              height: 30,
+              fit: BoxFit.fitHeight,
+              image: CachedNetworkImageProvider(commit.user.avatar_url)),
+        ],
+      ),
+      trailing: FlatButton(
+          child: Icon(Icons.open_in_new)),
+    );
   }
 
   void refreshCommits(context) async {
@@ -57,5 +71,13 @@ class _HistoryWidgetState extends State<HistoryWidget> {
       Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text(error.toString())));
     });
+  }
+
+  _openURLinBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

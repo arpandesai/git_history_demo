@@ -7,6 +7,8 @@ class GitCommit {
 
   String summary;
 
+  String externalURL;
+
   GitUser user;
 
   GitCommit(Map<String, dynamic> commitObject) {
@@ -14,5 +16,6 @@ class GitCommit {
     Map<String, dynamic> commit = commitObject["commit"];
     this.summary = commit["message"];
     this.user = GitUser(commitObject["author"]);
+    this.externalURL = commitObject["html_url"];
   }
 }

@@ -47,20 +47,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-          actions: <Widget>[FlatButton(onPressed: (){
-            setState(() {
-
-            });
-          }, child: Icon(Icons.refresh))],
-      ),
-      body: HistoryWidget());
-
+        appBar: AppBar(
+          title: Text(widget.title),
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  setState(() {});
+                },
+                child: Icon(Icons.refresh, color: Colors.white,))
+          ],
+        ),
+        body: HistoryWidget());
   }
 }
-
-
-
